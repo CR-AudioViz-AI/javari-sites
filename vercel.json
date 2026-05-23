@@ -1,12 +1,1 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install --legacy-peer-deps",
-  "framework": null,
-  "github": {
-    "autoAlias": false,
-    "silent": true
-  }
-}
+{"version":2,"public":true}
