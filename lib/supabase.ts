@@ -1,59 +1,30 @@
-/**
- * CR AudioViz AI - Supabase Client
- * =================================
- * 
- * Universal database client for CR AudioViz AI apps.
- * For authentication, credits, and central services, use:
- * 
- *   import { CentralServices, CentralAuth, CentralCredits } from './central-services';
- * 
- * This client is for app-specific database operations only.
- * Auth, payments, and credits should ALWAYS go through central services.
- */
+// lib/supabase.ts — Supabase client (lazy init, never crashes at build time)
+// CR AudioViz AI · EIN 39-3646201 · May 2026
+import { createClient } from "@supabase/supabase-js";
 
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 
-// Re-export admin utilities from central services
-export { isAdmin, shouldChargeCredits, ADMIN_EMAILS, CentralServices } from './central-services';
+// Lazy singleton — never initialized at module level
+let _client: ReturnType<typeof createClient> | null = null;
 
-// Centralized Supabase configuration
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://kteobfyferrukqeolofj.supabase.co';
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0ZW9iZnlmZXJydWtxZW9sb2ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIxOTcyNjYsImV4cCI6MjA3NzU1NzI2Nn0.uy-jlF_z6qVb8qogsNyGDLHqT4HhmdRhLrW7zPv3qhY';
-
-// Standard client for general use
-export const supabase: SupabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// Browser client for auth (SSR-safe singleton pattern)
-let browserClient: SupabaseClient | null = null;
-
-export function createSupabaseBrowserClient(): SupabaseClient {
-  if (typeof window === 'undefined') {
-    // Server-side: return new client each time
-    return createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  }
-  
-  // Client-side: return singleton
-  if (!browserClient) {
-    browserClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      auth: {
-        persistSession: true,
-        autoRefreshToken: true,
-        detectSessionInUrl: true
-      }
+export function getSupabase() {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;
+  if (!_client) {
+    _client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth: { persistSession: true, autoRefreshToken: true },
     });
   }
-  return browserClient;
+  return _client;
 }
 
-// Server client for API routes
-export function createSupabaseServerClient(): SupabaseClient {
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!serviceKey) {
-    console.warn('SUPABASE_SERVICE_ROLE_KEY not set, using anon key');
-    return createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  }
-  return createClient(SUPABASE_URL, serviceKey);
-}
+// Default export for backward compat with `import supabase from "@/lib/supabase"`
+const supabase = SUPABASE_URL && SUPABASE_ANON_KEY
+  ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+  : null as any;
 
-export { SUPABASE_URL, SUPABASE_ANON_KEY };
 export default supabase;
+export { supabase };
+
+// Named exports for common Supabase types
+export type { User, Session, AuthChangeEvent } from "@supabase/supabase-js";
