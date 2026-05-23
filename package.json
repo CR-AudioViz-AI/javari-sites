@@ -17,23 +17,18 @@
     "e2e": "playwright test",
     "e2e:headed": "PWDEBUG=1 playwright test",
     "e2e:report": "playwright show-report",
-    "e2e:ui": "playwright test --ui",
-    "start": "next start"
+    "e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
     "lucide-react": "^0.575.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "react-router-dom": "^7.9.4",
-    "@supabase/ssr": "^0.8.0",
-    "next": "14.2.35"
+    "@supabase/ssr": "^0.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
     "@faker-js/faker": "^10.3.0",
     "@playwright/test": "^1.58.2",
-    "@types/react": "18",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.27",
@@ -45,9 +40,7 @@
     "postcss": "^8.5.15",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "5",
     "typescript-eslint": "^8.57.0",
-    "vite": "^5.4.2",
-    "@types/node": "20"
+    "vite": "^5.4.2"
   }
 }
