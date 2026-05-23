@@ -5,25 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/env-check.mjs",
     "build": "next build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit -p tsconfig.app.json",
-    "test:accept": "node tests/accept.website.js",
-    "test:eval": "node tests/eval.website.js",
-    "test:perf": "node tests/perf.website.js",
-    "e2e:seed": "ts-node tests/setup/seed.ts",
-    "e2e": "playwright test",
-    "e2e:headed": "PWDEBUG=1 playwright test",
-    "e2e:report": "playwright show-report",
-    "e2e:ui": "playwright test --ui"
+    "typecheck": "tsc --noEmit -p tsconfig.app.json"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",
     "lucide-react": "^0.575.0",
     "react-router-dom": "^7.9.4",
-    "@supabase/ssr": "^0.8.0"
+    "@supabase/ssr": "^0.8.0",
+    "next": "14.2.35"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
