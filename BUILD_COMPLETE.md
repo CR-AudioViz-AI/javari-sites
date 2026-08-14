@@ -154,7 +154,7 @@ Status: ✅ PASSING
 ### 9. Publishing ✅
 - **Netlify one-click** - Returns live URL
 - **Export ZIP** - Static hosting anywhere
-- **CRAV VPS** - Optional Nginx deployment
+- **javari VPS** - Optional Nginx deployment
 - **GitHub Export** - Next.js project export
 - **Success surface** - Live URL, sitemap, health check
 
@@ -476,7 +476,7 @@ Status: ✅ PASSING
 - Ready for any static host
 - Includes sitemap/robots
 
-### CRAV VPS (Optional) 🔄
+### javari VPS (Optional) 🔄
 - Nginx configuration ready
 - Let's Encrypt SSL
 - Custom domain support

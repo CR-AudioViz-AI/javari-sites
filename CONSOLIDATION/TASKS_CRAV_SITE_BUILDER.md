@@ -1,4 +1,4 @@
-# Consolidation tasks: crav-site-builder → javari-sites
+# Consolidation tasks: javari-site-builder → javari-sites
 ## Source archived: June 2026
 
 ### Features to implement in javari-sites:
@@ -17,4 +17,4 @@
 #### Auth
 - [ ] Auth callback pattern (already matches Javari standard)
 
-#### Source reference: https://github.com/CR-AudioViz-AI/crav-site-builder (archived)
+#### Source reference: https://github.com/CR-AudioViz-AI/javari-site-builder (archived)
