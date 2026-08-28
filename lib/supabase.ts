@@ -1,9 +1,10 @@
 // lib/supabase.ts — Complete Supabase client with all common exports
 // CR AudioViz AI · EIN 39-3646201 · May 2026
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { secretKey, publishableKey, supabaseUrl } from "@craudioviz/platform-sdk";
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://kteobfyferrukqeolofj.supabase.co";
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const SUPABASE_URL = supabaseUrl();
+const SUPABASE_ANON_KEY = publishableKey();
 
 // Browser client (singleton)
 let _browserClient: SupabaseClient | null = null;
@@ -19,13 +20,13 @@ export function createSupabaseBrowserClient(): SupabaseClient {
 
 // Server client (new instance per call)
 export function createSupabaseServerClient(): SupabaseClient {
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || SUPABASE_ANON_KEY;
+  const key = secretKey() || SUPABASE_ANON_KEY;
   return createClient(SUPABASE_URL, key, { auth: { persistSession: false } });
 }
 
 // Admin client
 export function createSupabaseAdminClient(): SupabaseClient {
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || SUPABASE_ANON_KEY;
+  const key = secretKey() || SUPABASE_ANON_KEY;
   return createClient(SUPABASE_URL, key, { auth: { persistSession: false } });
 }
 
