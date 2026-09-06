@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     }
 
     const { data: currentSite } = await supabase
-      .from('websites')
+      .from('sites')
       .select('spec, version')
       .eq('id', siteId)
       .single();
@@ -58,7 +58,7 @@ export async function POST(req: Request) {
     const result = await response.json();
 
     await supabase
-      .from('websites')
+      .from('sites')
       .update({
         spec: result.data.spec,
         version: versionNumber,
