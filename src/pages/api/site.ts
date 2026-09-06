@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     }
 
     const { data, error } = await supabase
-      .from('websites')
+      .from('sites')
       .insert({
         org_id: orgId,
         name,
