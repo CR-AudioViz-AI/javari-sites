@@ -14,7 +14,7 @@ export async function GET(req: Request) {
     }
 
     const { data: currentSite } = await supabase
-      .from('websites')
+      .from('sites')
       .select('spec')
       .eq('id', siteId)
       .single();
