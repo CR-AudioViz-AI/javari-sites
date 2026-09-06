@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     }
 
     const { data: site } = await supabase
-      .from('websites')
+      .from('sites')
       .select('*')
       .eq('id', siteId)
       .single();
@@ -69,7 +69,7 @@ export async function POST(req: Request) {
     }
 
     await supabase
-      .from('websites')
+      .from('sites')
       .update({
         status: 'published',
         published_url: result.data.liveUrl || result.data.url,
