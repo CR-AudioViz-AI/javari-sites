@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     }
 
     await supabase
-      .from('websites')
+      .from('sites')
       .update({
         spec: targetVersion.spec,
         version: targetVersion.version,
