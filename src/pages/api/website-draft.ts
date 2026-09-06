@@ -41,7 +41,7 @@ export async function POST(req: Request) {
     trackGenerateSite(orgId || 'unknown', siteId, brief);
 
     await supabase
-      .from('websites')
+      .from('sites')
       .update({ status: 'draft', updated_at: new Date().toISOString() })
       .eq('id', siteId);
 
